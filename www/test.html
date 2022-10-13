@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title> Monthly Analysis</title>
+<meta name="hqdefault" content="width=device-width,intial-scale=1">
+<!--<link rel="stylesheet" href="themes/Bootstrap.css">-->
+
+<script type="text/javascript" src="js/chart.js"></script>
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.0.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+  <script>
+  $(document).ready(function(){
+  $.ajax({
+  type:"GET",
+  url:"PCI.xml",
+  dataType:"xml",
+  success:function(xml){
+$(xml).find('PCI').each(function(){
+var COST_OF_COKE = $(this).find('COST_OF_COKE').text();
+var COST_OF_COAL = $(this).find('COST_OF_COAL').text();
+var BFCOKE_RATE = $(this).find('BFCOKE_RATE').text();
+var NUTCOKE_RATE = $(this).find('NUTCOKE_RATE').text();
+var PCIRATE = $(this).find('PCIRATE').text();
+var CARBON_IN_PCICOAL = $(this).find('CARBON_IN_PCICOAL').text();
+var BFCOKEASH = $(this).find('BFCOKEASH').text();
+var  NUTCOKEASH= $(this).find('NUTCOKEASH').text();
+var a = $(this).find('Optimum_of_carbon').text();
+
+pass_value(BFCOKE_RATE,NUTCOKE_RATE,BFCOKEASH,NUTCOKEASH,PCIRATE ,COST_OF_COKE,COST_OF_COAL,a);
+}); //each function close
+} //sucess function closed
+});//ajax closed 
+});//ready closed
+  </script>
+  
+  
+  <script> 
+  function pass_value(bfr,ncr,bfa,nca,pcr,coke,coal,b)
+  {
+num1=bfr;
+num2 = ncr; 
+var x1=Number(num1) + Number(num2);
+var x1_m1=x1.toFixed(2);
+
+num3 = 100; 
+num4 = bfa; 
+var x3=Number(num3) - Number(num4); 
+var x3_m3=x3.toFixed(2);
+
+ 
+num5 = nca; 
+var x4=Number(num3) - Number(num5); 
+var x4_m4=x4.toFixed(2);
+
+num6 = x1_m1; 
+var x5=Number(num1)*100 / Number(num6); 
+var x5_m5=x5.toFixed(2);
+ 
+
+var x6=Number(num2)*100 / Number(num6); 
+var x6_m6=x6.toFixed(2);
+ 
+
+num7 = x5_m5; 
+num8 = x3_m3;
+num9 = x6_m6;
+num10 = x4_m4;
+var x7= (Number(num7)*Number(num8) + Number(num9)*Number(num10))/100; 
+var x7_m7=x7.toFixed(2);
+num11 = b; 
+num12 =  x7_m7 
+var x8=Number(num11)*100 / Number(num12); 
+var x8_m8=x8.toFixed(2);
+num13 = x8_m8;  
+num14 =pcr; 
+var x9=(Number(num13)-Number(num6))/Number(num14);  
+var x9_m9=x9.toFixed(2); 
+num15 = coke; 
+num16= coal; 
+num17= x9_m9; 
+var x11=(Number(num15) - Number(num16))* Number(num17)/1000 ;
+var x11_m11=x11.toFixed(2);  
+var y1=x11_m11*6000*30;
+}
+</script>
+</head>
+
+<body>
+<center>
+  <canvas id="c" width="400" height="400"></canvas>
+  <script type="text/javascript" src="js/Chart.js"></script>
+  <script>
+ 
+    var ctx = document.getElementById("c").getContext("2d");
+	 var MyNewChart = new Chart(ctx,{
+	 type:'line',
+   data : {
+      labels: ["January", "February", "March"],
+      datasets: [{
+        label: "COSTADVANTAGE",
+        fill: true,
+        backgroundColor: "rgba(38,185,154,0.3)",
+        borderColor: "rgba(38,185,154,0.7)",
+        borderWidth:2,
+		lineTension:0.2,
+        pointHitRadius: 50,
+        data:[x11_m11]
+		
+      }  {
+        label: "REPLACEMENT RATIO",
+        fill: true,
+        backgroundColor:  "rgba(38,185,154,0.3)",
+        borderColor:  "rgba(38,185,154,0.3)",
+         borderWidth:2,
+		lineTension:0.2,
+        pointHitRadius: 50,
+        data: [x9_m9]
+      } 
+	  ]
+    }
+    });
+  </script>
+  </center>
+</body>
+
+</html>

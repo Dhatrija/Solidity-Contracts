@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title> Inputs in PCI</title>
+<meta name="hqdefault" content="width=device-width,intial-scale=1">
+<link rel="stylesheet" href="css/index.css"/>
+<!--<link rel="stylesheet" href="themes/Bootstrap.css">-->
+<link rel="stylesheet" href="css/jquery.mobile-1.0.min.css"/>
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.0.min.js"></script>
+<script type="text/javascript" src="js/chart.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<link href="css/jquery.mobile.icons.min.css" rel="stylesheet">
+</head>
+<body>
+<div data-role="page" id="pageone" data-theme="a">
+  <div data-role="header">
+    <h1>PCI
+	<div class="ui-block-a"><button type="button" onclick="document.location.href ='index.html'" data-theme="a">BACK</button></div>
+	</h1>
+  </div>
+  <script>
+  $(document).ready(function(){
+  $.ajax({
+  type:"GET",
+  url:"PCI.xml",
+  dataType:"xml",
+  success:function(xml){
+$(xml).find('PCI').each(function(){
+var COST_OF_COKE = $(this).find('COST_OF_COKE').text();
+var COST_OF_COAL = $(this).find('COST_OF_COAL').text();
+var BFCOKE_RATE = $(this).find('BFCOKE_RATE').text();
+var NUTCOKE_RATE = $(this).find('NUTCOKE_RATE').text();
+var PCIRATE = $(this).find('PCIRATE').text();
+var CARBON_IN_PCICOAL = $(this).find('CARBON_IN_PCICOAL').text();
+var BFCOKEASH = $(this).find('BFCOKEASH').text();
+var  NUTCOKEASH= $(this).find('NUTCOKEASH').text();
+var a = $(this).find('Optimum carbon rate in 'all coke' operation').text();
+//alert(COST_OF_COKE);
+console.log(COST_OF_COKE);
+}); //each function close
+} //sucess function closed
+});//ajax closed 
+});//ready closed
+  </script>
+  
+<script>
+ function calculate() 
+{ 
+num1 = document.getElementById("first").value; 
+num2 = document.getElementById("second").value; 
+var x1=Number(num1) + Number(num2);
+var x1_m1=x1.toFixed(2);
+document.getElementById("third").value= x1_m1;
+
+num3 = x1_m1; 
+num4 = document.getElementById("fourth").value; 
+var x2=Number(num3) + Number(num4);
+var x2_m2=x2.toFixed(2);
+document.getElementById("fifth").value=x2_m2;
+
+num5 = 100; 
+num6 = document.getElementById("sixth").value; 
+var x3=Number(num5) - Number(num6); 
+var x3_m3=x3.toFixed(2);
+document.getElementById("nineth").value= x3_m3;
+
+num7 = document.getElementById("seventh").value; 
+var x4=Number(num5) - Number(num7); 
+var x4_m4=x4.toFixed(2);
+document.getElementById("tenth").value =x4_m4;
+
+var x5=Number(num1)*100 / Number(num3); 
+var x5_m5=x5.toFixed(2);
+document.getElementById("seventeenth").value = x5_m5;
+
+var x6=Number(num2)*100 / Number(num3); 
+var x6_m6=x6.toFixed(2);
+document.getElementById("eighteenth").value = x6_m6;
+
+num8 =x5_m5; 
+num9 = x3_m3;
+num10= x6_m6;
+num11 = x4_m4;
+var x7= (Number(num8)*Number(num9) + Number(num10)*Number(num11))/100; 
+var x7_m7=x7.toFixed(2);
+document.getElementById("eleventh").value= x7_m7;
+
+num12 = document.getElementById("twelthth").value; 
+num13 = x7_m7; 
+var x8=Number(num12)*100 / Number(num13); 
+var x8_m8=x8.toFixed(2)
+document.getElementById("thirteenth").value=x8_m8;
+
+num14 = document.getElementById("thirteenth").value; 
+var x9=(Number(num14)-Number(num3))/Number(num4);  
+var x9_m9=x9.toFixed(2);
+document.getElementById("sixteenth").value =x9_m9;
+
+num15 = document.getElementById("eight").value;
+var x10= (Number(num1)*Number(num9) + Number(num2)*Number(num11) + Number(num4)*Number(num15))/100;
+var x10_m10=x10.toFixed(2);
+document.getElementById("nineteenth").value =x10_m10;
+
+num16= document.getElementById("fourteenth").value; 
+num17 = document.getElementById("fifteenth").value; 
+num18 =x9_m9; 
+var x11=(Number(num16) - Number(num17))* Number(num18)/1000 ;
+var x11_m11=x11.toFixed(2);  
+document.getElementById("twentyth").value = x11_m11 ; 
+}
+</script>
+<div data-role="main" class="ui-content">
+ 	  <div class="ui-grid-a">
+      <div class="ui-block-a">
+	  <div class="ui-block-a"><strong>COST OF COKE</strong></div>
+	  <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="fourteenth" ><br></strong></div>
+  <div class="ui-block-a"><strong>COST OF COAL</strong> </div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="fifteenth" ><br></strong></div>
+  <div class="ui-block-a"><strong>BF COKE RATE</strong> </div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="first"><br></strong></div>
+  <div class="ui-block-a"><strong>NUT COKE RATE</strong> </div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="second"><br></strong></div>
+  <div class="ui-block-a"><strong>PCI RATE</strong></div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="fourth"><br></strong></div>
+  <div class="ui-block-a"><strong>Carbon in PCI Coal</strong></div>
+   <div class="ui-block-a"><strong><input type="number"pattern="[0-9]*"  id="eight"  ><br></strong></div>
+  <div class="ui-block-a"><strong>BF COKE ASH(%)</strong></div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="sixth"  ><br></strong></div>
+  <div class="ui-block-a"><strong>NUT COKE ASH(%)</strong></div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="seventh" ><br></strong></div>
+  <div class="ui-block-a"><strong>Optimum carbon rate</strong></div>
+   <div class="ui-block-a"><strong><input type="number" pattern="[0-9]*" id="twelthth" ><br></strong></div>
+    
+        </div>
+		
+		<!-- <div class="ui-grid-a"> -->
+<div class="ui-block-b">
+ <p> <div class="ui-block-b"><strong>MET COKE RATE</strong> </div> </p>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="third"><br></strong> </div>
+  <div class="ui-block-b"><strong>FUEL RATE</strong> </div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*"  id="fifth"><br></strong> </div>
+  <div class="ui-block-b"><strong>% BF COKE </strong></div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="seventeenth"><br></strong> </div>
+  <div class="ui-block-b"><strong>% NUT COKE</strong> </div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="eighteenth"><br></strong> </div>
+  <div class="ui-block-b"><strong>BF coke fixed carbon</strong> </div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="nineth"><br></strong> </div>
+  <div class="ui-block-b"><strong>NUT coke fixed carbon</strong> </div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="tenth"><br></strong> </div>
+  <div class="ui-block-b"><strong>Met coke carbon</strong></div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id ="eleventh"><br></strong> </div>
+  <div class="ui-block-b"><strong>BASE COKE RATE</strong> </div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id ="thirteenth"><br></strong> </div>
+  <div class="ui-block-b"><strong>REPLACEMENT RATIO </strong></div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="sixteenth"><br></strong> </div>
+ <div class="ui-block-b"><strong>COSTADVANTAGE</strong></div>
+   <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="twentyth"><br></strong> </div>
+  <div class="ui-block-b"><strong>CARBON RATE</strong></div>
+    <div class="ui-block-b"><strong><input type="number" pattern="[0-9]*" id="nineteenth"><br></strong> </div>
+      </div>
+    <!-- </div> -->
+  </div>
+</div> <!-- /grid-a -->
+<div class="ui-grid-solo">
+  <div class="ui-block-a"><button type="button" onClick="calculate()" data-theme="b">CALCULATE</button></div>
+
+ 
+</div>
+
+
+ </body>
+</html>
